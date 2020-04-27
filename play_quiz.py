@@ -60,10 +60,13 @@ def get_quiz(quiz_length):
         answer = input("What is the french word for " + eng_words[shuffled_list[n]] + "? ")
         if answer == fren_words[shuffled_list[n]]:
             print("CORRECT!")
+            print("")
             final_score = final_score + 1
             n = n + 1
         else:
             print("INCORRECT")
+            print("The correct answer is " + fren_words[shuffled_list[n]])
+            print("")
             n = n + 1
     
     return final_score
@@ -85,16 +88,23 @@ quiz_length = int(quiz_length)
 #print(quiz_length)
 
 eng_words = get_eng_word(category_data)
-print(eng_words)
+#print(eng_words)
 
 fren_words = get_fren_word(category_data)
-print(fren_words)
+#print(fren_words)
 
 question_numbers = list(range(0, len(eng_words)))
-print(question_numbers)
+#print(question_numbers)
 
 shuffled_list = random.sample(question_numbers, int(quiz_length))
-print(shuffled_list)
+#print(shuffled_list)
 
 final_score = get_quiz(quiz_length)
+print("****************************")
 print("You scored :", final_score)
+print("****************************")
+
+#TODO: Congratulations, that's a new high score!
+#TODO: Congratulations, you answered all correctly!
+
+#TODO: Email report
