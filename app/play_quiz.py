@@ -1,8 +1,12 @@
+# app/play_quiz.py
+
 import csv
 import random
+import os
 
 def load_database():
-    csv_file_path = "words_database.csv" # a relative filepath
+    #csv_file_path = "words_database.csv" # a relative filepath
+    csv_file_path = os.path.join(os.path.dirname(__file__), "../data", "words_database.csv")
     all_data = [] # list containing all data from the database
 
     with open(csv_file_path, "r") as csv_file: # "r" means "open the file for reading"
