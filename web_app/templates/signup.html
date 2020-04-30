@@ -3,30 +3,77 @@
 
 {% block content %}
 
+<style>
+    button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 10px;
+    margin: 4px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    opacity: 0.8;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+</style>
+
 <h1>New user Registration Form</h1>
 
 <p>Please use the form below to register</p>
 
-<form action="/user/create" method="GET">
+<form action="/user/create" method="GET"> <!-- Doesn't work when method is POST-->
 
-    <label>Full Name:</label>
-    <input type="text" name="full_name" placeholder="Example User" value="Example User">
+    <label>First Name:</label>
+    <input type="text" name="first_name" placeholder="First" required>
+    <br>
+
+    <label>Last Name:</label>
+    <input type="text" name="last_name" placeholder="Last"  required>
     <br>
 
     <label>Email Address:</label>
-    <input type="text" name="email_address" placeholder="me@example.com" value="me@example.com">
+    <input type="text" name="email_address" placeholder="id@example.com"  required>
     <br>
 
     <label>Country:</label>
-    <select name="country">
-        <option value="US" selected="true">United States</option>
+    <select name="country" required>
+        <option value="US">United States</option>
         <option value="UK">United Kingdom</option>
         <option value="Japan">Japan</option>
-        <option value="India">India</option>
+        <option value="India" selected="true">India</option>
     </select>
     <br>
 
+    <label>Occupation: </label>
+        <input type="radio" id="student" name="occupation" value="student" required>
+        <label>Student</label>
+        <input type="radio" id="teacher" name="occupation" value="teacher" required>
+        <label>Teacher</label>
+    <br>
+
+    <!-- Source: https://www.w3schools.com/html/html_form_input_types.asp -->
+    <label>Birthday: </label>
+    <input type="date" id="birthday" name="birthday">
+    <label><i>(optional)</i></label>
+
+    <br>
+    <br>
+
+    <!--Source: https://www.w3schools.com/howto/howto_css_signup_form.asp-->
+    <label>User Name:</label>
+    <input type="text" placeholder="Enter Username" name="user_name" required>
+    <br>
+    <label>Password:</label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+    
+    <br>
+    <br>
+
     <button>Submit</button>
+
 </form>
 
 

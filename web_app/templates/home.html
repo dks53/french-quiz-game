@@ -3,14 +3,25 @@
 
 {% block content %}
 
-    <h1>Welcome to the french quiz!</h1>
+    <h1>Welcome to the french quiz app!</h1>
 
-    <p>This is a paragraph text</p>
+    <p>This app will help you practice your french at home!</p>
+    <p>Here are all the cool things that you can do with this app:</p>
 
     <ul>
-        <li>First list item</li>
-        <li>Second list item</li>
-        <li>Third list item</li>
+        <li>English to French translation quiz</li>
+        <li>Your choice of level and category</li>
+        <li>Set your own quiz length</li>
+        <li>Share your quiz scores via email <i>(coming soon)</i> </li>
+        <li>Create an account to store your highest score for future reference <i>(coming soon)</i></li>
+        <li>Add new words to the questions database <i>(coming soon) (teachers only)</i></li>
     </ul>
+    
+<form action="/new" method="GET">
+
+    <!-- Source: https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+    <button class="btn btn-primary" style="background-color:gold; border-color: white;"><b>New Quiz</b></button>
+
+</form>
 
 {% endblock %}

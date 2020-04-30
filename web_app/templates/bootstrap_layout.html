@@ -2,7 +2,7 @@
 <html>
   <head>
     {% block title %}
-      <title>My Starter Web App | Helps students learn how to use the Flask Python package.</title>
+      <title>English-French Quiz App</title>
     {% endblock %}
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -33,8 +33,8 @@
       ('/user/new', 'new_user', 'Sign Up')
     ] -%}
     {% set active_page = active_page|default('index') -%}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">My Web App</a>
+    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color:deepskyblue;">
+      <a class="navbar-brand" href="/">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -63,10 +63,15 @@
       </div>
 
       <!-- FOOTER -->
-      <div id="footer">
+      <div id="footer" style="font-size: smaller; color: gray;">
         <hr>
-        &copy; Copyright 2019 Prof. MJ Rossetti |
+        &copy; Copyright 2020 Darshil Shah
+        <br>
+        <a> This app has been created with the help of Professor MJ Rossetti | </a>
         <a href="https://github.com/prof-rossetti/">source</a>
+        <br>
+        <a> If you would like to provide any feedback or suggestions </a>
+        <a href="">click here</a>
       </div>
     </div>
 

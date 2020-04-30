@@ -33,3 +33,9 @@ def regisetered():
     print("VISITED USER CREATED PAGE")
     #return "New user created page (TODO)"
     return render_template("created_user.html")
+
+@home_routes.route("/new")
+def new_quiz():
+    print("VISITED NEW QUIZ PAGE")
+    return "New quiz start page (TODO)"
+    #return render_template("created_user.html")
