@@ -76,39 +76,44 @@ def get_quiz(quiz_length):
     return final_score
 
 #################
+if __name__ == "__main__":
 
-all_data = load_database()
-
-chosen_level = input("Choose a level: ")
-level_data = get_level_data(chosen_level)
-#print(level_data)
-
-chosen_category = input("Choose a category: ")
-category_data = get_category_data(chosen_category)
-#print(category_data)
-
-quiz_length = input("How many questions would you like in the quiz? ")
-quiz_length = int(quiz_length)
-#print(quiz_length)
-
-eng_words = get_eng_word(category_data)
-#print(eng_words)
-
-fren_words = get_fren_word(category_data)
-#print(fren_words)
-
-question_numbers = list(range(0, len(eng_words)))
-#print(question_numbers)
-
-shuffled_list = random.sample(question_numbers, int(quiz_length))
-#print(shuffled_list)
-
-final_score = get_quiz(quiz_length)
-print("****************************")
-print("You scored :", final_score)
-print("****************************")
-
-#TODO: Congratulations, that's a new high score!
-#TODO: Congratulations, you answered all correctly!
-
-#TODO: Email report
+    all_data = load_database()
+    
+    print(all_data)
+    
+    breakpoint()
+    
+    chosen_level = input("Choose a level: ")
+    level_data = get_level_data(chosen_level)
+    #print(level_data)
+    
+    chosen_category = input("Choose a category: ")
+    category_data = get_category_data(chosen_category)
+    #print(category_data)
+    
+    quiz_length = input("How many questions would you like in the quiz? ")
+    quiz_length = int(quiz_length)
+    #print(quiz_length)
+    
+    eng_words = get_eng_word(category_data)
+    #print(eng_words)
+    
+    fren_words = get_fren_word(category_data)
+    #print(fren_words)
+    
+    question_numbers = list(range(0, len(eng_words)))
+    #print(question_numbers)
+    
+    shuffled_list = random.sample(question_numbers, int(quiz_length))
+    #print(shuffled_list)
+    
+    final_score = get_quiz(quiz_length)
+    print("****************************")
+    print("You scored :", final_score)
+    print("****************************")
+    
+    #TODO: Congratulations, that's a new high score!
+    #TODO: Congratulations, you answered all correctly!
+    
+    #TODO: Email report
