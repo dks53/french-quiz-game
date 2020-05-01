@@ -24,7 +24,7 @@
 
 <p>Please use the form below to register</p>
 
-<form action="/user/create" method="GET"> <!-- Doesn't work when method is POST-->
+<form action="/user/create" method="POST"> <!-- Doesn't work when method is POST-->
 
     <label>First Name:</label>
     <input type="text" name="first_name" placeholder="First" required>
@@ -35,7 +35,7 @@
     <br>
 
     <label>Email Address:</label>
-    <input type="text" name="email_address" placeholder="id@example.com"  required>
+    <input type="email" name="email_address" placeholder="id@example.com"  required>
     <br>
 
     <label>Country:</label>

@@ -4,7 +4,7 @@ import csv
 import random
 import os
 
-from app.play_quiz import 
+#from app.play_quiz import load_database
 
 all_data = [
     OrderedDict([('gender', 'F'), ('french_word', 'agrafeuse'), ('english_word', 'stapler'), ('category', 'stationary'), ('level', '1')]), 
@@ -13,6 +13,8 @@ all_data = [
     OrderedDict([('gender', 'F'), ('french_word', 'gomme'), ('english_word', 'eraser'), ('category', 'stationary'), ('level', '1')]), 
     OrderedDict([('gender', 'F'), ('french_word', 'calculatrice'), ('english_word', 'calculator'), ('category', 'stationary'), ('level', '2')])
 ]
+
+print(type(all_data))
 
 #def load_database():
 

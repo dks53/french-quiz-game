@@ -1,0 +1,31 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "new_user" %}
+
+{% block content %}
+
+<h1>Choose your quiz settings:</h1>
+<ul>
+    <li>Level</li>
+    <li>Category</li>
+    <li>Length (# of questions)</li>
+</ul>
+
+<form action="/new/start" method="POST"> <!-- Doesn't work when method is POST-->
+
+    <label>Level:</label>
+    <select name="level" required>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+    </select>
+    <br>
+    <br>
+
+    <!-- Choice of category depending on level selection -->
+
+    <button class="btn btn-primary" style="background-color:gold; border-color: white;"><b>Begin Quiz</b></button>
+
+</form>
+
+
+{% endblock %}

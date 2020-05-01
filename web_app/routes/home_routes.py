@@ -1,6 +1,6 @@
 # web_app/routes/home_routes.py
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash, request, redirect
 
 home_routes = Blueprint("home_routes", __name__)
 
@@ -28,14 +28,26 @@ def register():
     #return "New user page (TODO)"
     return render_template("signup.html")
 
-@home_routes.route("/user/create")
+@home_routes.route("/user/create", methods=["POST"])
 def regisetered():
     print("VISITED USER CREATED PAGE")
+    #print("FORM DATA:", dict(request.form))
+    user = dict(request.form)
+    # todo: store in a database or google sheet!
+    flash(f"User '{user['first_name']}' created successfully!", "success")
     #return "New user created page (TODO)"
-    return render_template("created_user.html")
+    return redirect("/")
 
-@home_routes.route("/new")
-def new_quiz():
-    print("VISITED NEW QUIZ PAGE")
+@home_routes.route("/new/setup")
+def new_quiz_setup():
+    print("VISITED NEW QUIZ SETTINGS PAGE")
+    #return "New quiz settings page (TODO)"
+    return render_template("quiz_setup.html")
+
+@home_routes.route("/new/start", methods=["POST"])
+def new_quiz_start():
+    print("VISITED NEW QUIZ START PAGE")
+    print("FORM DATA:", dict(request.form))
+    user = dict(request.form)
     return "New quiz start page (TODO)"
-    #return render_template("created_user.html")
+    #return render_template("quiz_setup.html")

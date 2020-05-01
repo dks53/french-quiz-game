@@ -18,6 +18,19 @@ def load_database():
 
     return all_data
 
+def level_validation(user_level):
+    count = 0
+    for data in all_data:
+        if data["level"] == user_level:
+            count = count + 1
+        else:
+            pass
+    
+    if count == 0:
+        return print("You chose an invalid level, please try again"), exit()
+    else:
+        return user_level
+
 def get_level_data(user_level):
     level_data = []
 
@@ -28,6 +41,19 @@ def get_level_data(user_level):
             pass
     
     return level_data
+
+def category_validation(user_category):
+    count = 0
+    for data in level_data:
+        if data["category"] == user_category:
+            count = count + 1
+        else:
+            pass
+    
+    if count == 0:
+        return print("You chose an invalid category, please try again"), exit()
+    else:
+        return user_category
 
 def get_category_data(user_category):
     category_data = []
@@ -79,41 +105,43 @@ def get_quiz(quiz_length):
 if __name__ == "__main__":
 
     all_data = load_database()
-    
-    print(all_data)
-    
-    breakpoint()
-    
+
     chosen_level = input("Choose a level: ")
+    valid_level = level_validation(chosen_level)
+    print("You chose Level ", valid_level, "\n")
+
     level_data = get_level_data(chosen_level)
     #print(level_data)
-    
+
     chosen_category = input("Choose a category: ")
+    valid_category = category_validation(chosen_category)
+    print("You chose the ", valid_category, "category", "\n")
+    
     category_data = get_category_data(chosen_category)
     #print(category_data)
-    
+
     quiz_length = input("How many questions would you like in the quiz? ")
     quiz_length = int(quiz_length)
     #print(quiz_length)
-    
+
     eng_words = get_eng_word(category_data)
     #print(eng_words)
-    
+
     fren_words = get_fren_word(category_data)
     #print(fren_words)
-    
+
     question_numbers = list(range(0, len(eng_words)))
     #print(question_numbers)
-    
+
     shuffled_list = random.sample(question_numbers, int(quiz_length))
     #print(shuffled_list)
-    
+
     final_score = get_quiz(quiz_length)
     print("****************************")
     print("You scored :", final_score)
     print("****************************")
-    
+
     #TODO: Congratulations, that's a new high score!
     #TODO: Congratulations, you answered all correctly!
-    
+
     #TODO: Email report
