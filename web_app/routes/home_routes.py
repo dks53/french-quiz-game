@@ -31,8 +31,9 @@ def register():
 @home_routes.route("/user/create", methods=["POST"])
 def regisetered():
     print("VISITED USER CREATED PAGE")
-    #print("FORM DATA:", dict(request.form))
     user = dict(request.form)
+    #print("FORM DATA:", dict(request.form))
+    print("FORM DATA:", user)
     # todo: store in a database or google sheet!
     flash(f"User '{user['first_name']}' created successfully!", "success")
     #return "New user created page (TODO)"
@@ -47,7 +48,8 @@ def new_quiz_setup():
 @home_routes.route("/new/start", methods=["POST"])
 def new_quiz_start():
     print("VISITED NEW QUIZ START PAGE")
-    print("FORM DATA:", dict(request.form))
-    user = dict(request.form)
+    #print("FORM DATA:", dict(request.form))
+    setup_info = dict(request.form)
+    print(setup_info)
     return "New quiz start page (TODO)"
     #return render_template("quiz_setup.html")

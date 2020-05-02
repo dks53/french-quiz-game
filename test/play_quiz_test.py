@@ -14,8 +14,6 @@ all_data = [
     OrderedDict([('gender', 'F'), ('french_word', 'calculatrice'), ('english_word', 'calculator'), ('category', 'stationary'), ('level', '2')])
 ]
 
-print(type(all_data))
-
 #def load_database():
 
 
