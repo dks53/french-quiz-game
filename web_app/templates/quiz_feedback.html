@@ -9,19 +9,23 @@
     <li>Category: {{quiz_params['categ']}}</li>
     <li>Length (# of questions): {{quiz_params['len']}}</li>
 </ul>
-
+<!-- <table style="{ border-style: 'solid' }"> -->
+    <thead><td>Your Answer</td> <td>Correct Answer</td> <td>Correct?</td></thead>
     {% if feedbacks %}
         {% for feedback in feedbacks %}
-            <label> {{feedback['english_word']}} </label>
-            <label> {{feedback['french_word']}} </label>
-            {% if feedback["correct"] %}
-                Correct
-            {% else %}
-                Incorrect
-            {% endif %}
-            <br>
+        <tr>
+            <td> {{feedback['english_word']}} </td>
+            <td> {{feedback['french_word']}} </td>
+            <td>
+                {% if feedback["correct"] %}
+                    Correct
+                {% else %}
+                    Incorrect
+                {% endif %}
+            </td>
+        </tr>
         {% endfor %}
     {% endif %}
-
+</table>
 
 {% endblock %}
