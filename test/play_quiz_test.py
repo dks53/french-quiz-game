@@ -3,8 +3,9 @@
 import csv
 import random
 import os
+import pytest
 
-#from app.play_quiz import load_database
+from app.play_quiz import get_quiz
 
 all_data = [
     OrderedDict([('gender', 'F'), ('french_word', 'agrafeuse'), ('english_word', 'stapler'), ('category', 'stationary'), ('level', '1')]), 
@@ -29,4 +30,4 @@ all_data = [
 #def get_fren_word(category_data):
 
 
-#def get_quiz(quiz_length):
+#def test_get_quiz():

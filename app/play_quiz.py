@@ -14,7 +14,7 @@ def load_database():
         # reader = csv.reader(csv_file) # if your CSV doesn't have headers
         for row in reader:
             #print(row["gender"], row["french_word"], row["english_word"], row["category"], row["level"])
-            all_data.append(row)
+            all_data.append(dict(row))
 
     return all_data
 
@@ -33,6 +33,7 @@ def level_validation(user_level):
 
 def get_level_data(user_level):
     level_data = []
+    all_data = load_database()
 
     for data in all_data:
         if data["level"] == user_level:
@@ -55,9 +56,9 @@ def category_validation(user_category):
     else:
         return user_category
 
-def get_category_data(user_category):
+def get_category_data(user_category, level_data_info):
     category_data = []
-    for data in level_data:
+    for data in level_data_info:
         if data["category"] == user_category:
             category_data.append(data)
         else:
@@ -104,31 +105,31 @@ def get_quiz(quiz_length):
 #################
 if __name__ == "__main__":
 
-    all_data = load_database()
+    #all_data = load_database()
 
     chosen_level = input("Choose a level: ")
     valid_level = level_validation(chosen_level)
     print("You chose Level ", valid_level, "\n")
 
     level_data = get_level_data(chosen_level)
-    #print(level_data)
+    print(level_data)
 
     chosen_category = input("Choose a category: ")
     valid_category = category_validation(chosen_category)
     print("You chose the ", valid_category, "category", "\n")
     
-    category_data = get_category_data(chosen_category)
-    #print(category_data)
+    category_data = get_category_data(chosen_category, level_data)
+    print(category_data)
 
     quiz_length = input("How many questions would you like in the quiz? ")
     quiz_length = int(quiz_length)
-    #print(quiz_length)
+    print(quiz_length)
 
     eng_words = get_eng_word(category_data)
-    #print(eng_words)
+    print(eng_words)
 
     fren_words = get_fren_word(category_data)
-    #print(fren_words)
+    print(fren_words)
 
     question_numbers = list(range(0, len(eng_words)))
     #print(question_numbers)

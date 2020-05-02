@@ -1,0 +1,27 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "new_user" %}
+
+{% block content %}
+
+<h1>Here's how you did:</h1>
+<ul>
+    <li>Level: {{quiz_params['lvl']}}</li>
+    <li>Category: {{quiz_params['categ']}}</li>
+    <li>Length (# of questions): {{quiz_params['len']}}</li>
+</ul>
+
+    {% if feedbacks %}
+        {% for feedback in feedbacks %}
+            <label> {{feedback['english_word']}} </label>
+            <label> {{feedback['french_word']}} </label>
+            {% if feedback["correct"] %}
+                Correct
+            {% else %}
+                Incorrect
+            {% endif %}
+            <br>
+        {% endfor %}
+    {% endif %}
+
+
+{% endblock %}

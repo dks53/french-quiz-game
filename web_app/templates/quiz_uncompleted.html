@@ -1,0 +1,32 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "new_user" %}
+
+{% block content %}
+
+<h1>Quiz</h1>
+<ul>
+    <li>Level: {{quiz_params['lvl']}}</li>
+    <li>Category: {{quiz_params['categ']}}</li>
+    <li>Length (# of questions): {{quiz_params['len']}}</li>
+</ul>
+
+<form action="/new/feedback" method="POST">
+    <input type="hidden" name="quiz_length" value="{{quiz_params['len']}}">
+    <input type="hidden" name="quiz_cat" value="{{quiz_params['categ']}}">
+    <input type="hidden" name="quiz_level" value="{{quiz_params['lvl']}}">
+    {% if questions %}
+        {% for question in questions %}
+            <label> {{question['english_word']}} </label>
+            <input type="text" name="{{question['number']}}" placeholder=" oui">
+            <input type="hidden" name="{{question['number']}}_answer" value="{{question['french_word']}}">
+            <br>
+        {% endfor %}
+    {% endif %}
+
+    
+    <br>
+    <br>
+    <button class="btn btn-primary" style="background-color:gold; border-color: white;"><b>Submit Quiz</b></button>
+
+</form>
+{% endblock %}
