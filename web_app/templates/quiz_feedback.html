@@ -29,9 +29,9 @@
             <td> {{feedback['french_word']}} </td>
             <td>
                 {% if feedback["correct"] %}
-                    <label style = "color:green;"> Correct </label>
+                    <label style = "color:green;"> ✅ Correct</label>
                 {% else %}
-                    <label style = "color:red;"> Incorrect </label>
+                    <label style = "color:red;"> ❌ Incorrect</label>
                 {% endif %}
             </td>
             <br>
@@ -51,7 +51,7 @@
     <i>Remarks: {{comment}}</i>
 </label>
 
-
+<!-- SEND EMAIL TO AN EMAIL ADDRESS INPUT BY THE USER.-->
 
 
 {% endblock %}

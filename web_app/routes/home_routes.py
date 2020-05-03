@@ -37,7 +37,7 @@ def regisetered():
     #print("FORM DATA:", dict(request.form))
     print("FORM DATA:", user)
     # todo: store in a database or google sheet!
-    flash(f"User '{user['first_name']}' created successfully!", "success")
+    flash(f"User '{user['user_name']}' created successfully!", "success")
     #return "New user created page (TODO)"
     return redirect("/")
 
@@ -113,11 +113,9 @@ def new_quiz_end():
         else:
             score_count
     
-    print(score_count)
-
+    #print(score_count)
     percent_score = round((float(score_count)/float(setup_info['len']))*100,2)
-
-    print(percent_score)
+    #print(percent_score)
 
     comment = ""
 
@@ -132,9 +130,12 @@ def new_quiz_end():
     else:
         comment = "IF THIS SHOWS UP, SOMETHING'S WRONG"
 
-    
+    #email_report_to = str(request.form)
+    #print(email_report_to)
 
-    # questions must contain english word and ID
+    #flash(f"Quiz report emailed to '{email_report_to}' successfully!", "success")
+
     return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info, 
     score_count=score_count, percent_score=percent_score, comment=comment)
     #return render_template("quiz_setup.html")
+

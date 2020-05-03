@@ -12,21 +12,6 @@ load_dotenv()
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 MY_EMAIL = os.environ.get("MY_EMAIL_ADDRESS")
 
-def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>"):
-    client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
-    print("CLIENT:", type(client))
-    print("SUBJECT:", subject)
-    #print("HTML:", html)
-    message = Mail(from_email=MY_EMAIL, to_emails=MY_EMAIL, subject=subject, html_content=html)
-    try:
-        response = client.send(message)
-        print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
-        print(response.status_code) #> 202 indicates SUCCESS
-        return response
-    except Exception as e:
-        print("OOPS", e.message)
-        return None
-
 def load_database():
     #csv_file_path = "words_database.csv" # a relative filepath
     csv_file_path = os.path.join(os.path.dirname(__file__), "../data", "words_database.csv")
@@ -125,6 +110,21 @@ def get_quiz(quiz_length):
     
     return final_score
 
+def send_email(subject="French Quiz Score Report", html=""):
+    client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
+    print("CLIENT:", type(client))
+    print("SUBJECT:", subject)
+    #print("HTML:", html)
+    message = Mail(from_email=MY_EMAIL, to_emails=MY_EMAIL, subject=subject, html_content=html)
+    try:
+        response = client.send(message)
+        print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
+        print(response.status_code) #> 202 indicates SUCCESS
+        return response
+    except Exception as e:
+        print("OOPS", e.message)
+        return None
+
 #################
 if __name__ == "__main__":
 
@@ -135,21 +135,21 @@ if __name__ == "__main__":
     print("You chose Level ", valid_level, "\n")
 
     level_data = get_level_data(chosen_level)
-    print(level_data)
+    #print(level_data)
 
     chosen_category = input("Choose a category: ")
     valid_category = category_validation(chosen_category)
     print("You chose the ", valid_category, "category", "\n")
     
     category_data = get_category_data(chosen_category, level_data)
-    print(category_data)
+    #print(category_data)
 
     quiz_length = input("How many questions would you like in the quiz? ")
     quiz_length = int(quiz_length)
-    print(quiz_length)
+    #print(quiz_length)
 
     eng_words = get_eng_word(category_data)
-    print(eng_words)
+    #print(eng_words)
 
     fren_words = get_fren_word(category_data)
     print(fren_words)
@@ -165,21 +165,28 @@ if __name__ == "__main__":
     print("You scored :", final_score)
     print("****************************")
 
-    example_subject = "French Quiz Score"
+    subject = "French Quiz Score"
 
-    example_html = f"""
+    content = f"""
     <h3>This is a test of the French Quiz Score Email Report</h3>
     <h4>Today's Date</h4>
     <p>Sun, May 3rd, 2020</p>
-    <h4>My Score</h4>
-    <ul>
-        <li>*********************</li>
-        <li>You scored: {final_score} </li>
-        <li>*********************</li>
-    </ul>
+    <h4>French Quiz Score Report</h4>
+    <br>
+    Level: {valid_level} <br>
+    Categroy: {valid_category} <br>
+    <br>
+
+    ************************** <br>
+    Final Score: {final_score} out of {quiz_length} <br>
+    ************************** <br>
+    
+    <br>
+    <br>
+
     """
 
-    send_email(example_subject, example_html)
+    send_email(subject, content)
 
     #TODO: Congratulations, that's a new high score!
     #TODO: Congratulations, you answered all correctly!
