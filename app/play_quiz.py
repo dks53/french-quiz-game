@@ -111,6 +111,7 @@ def get_quiz(quiz_length):
     return final_score
 
 def send_email(subject="French Quiz Score Report", html=""):
+    
     client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
     print("CLIENT:", type(client))
     print("SUBJECT:", subject)

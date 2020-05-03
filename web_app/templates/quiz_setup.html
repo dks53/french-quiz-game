@@ -9,6 +9,7 @@
     <li>Category</li>
     <li>Length (# of questions)</li>
 </ul>
+<hr>
 
 <form action="/new/start" method="POST"> <!-- Doesn't work when method is POST-->
 
@@ -22,13 +23,14 @@
     <br>
     <br>
 
-    <label>Level:</label>
+    <label>Category:</label>
     <select name="categ" required>
         <option value="animals">Level 1 - Animals</option>
         <option value="stationary">Level 1 - Stationary</option>
         <option value="cuisine">Level 2 - Cuisine</option>
         <option value="health">Level 3 - Health</option>
     </select>
+    <label style = "font-size: small;"> ** NOTE: You must select a category that corresponds to your chosen level.</label>
 
     <br>
     <br>

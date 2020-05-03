@@ -50,6 +50,17 @@
 <label style = "color:deepskyblue;"> 
     <i>Remarks: {{comment}}</i>
 </label>
+<br>
+<br>
+<form action="/new/email" method="POST"> <!-- Doesn't work when method is POST-->
+
+    <label>Send quiz result to:</label>
+    <input type="email" name="email_address" placeholder="id@example.com">
+    <br>
+
+    <button>Send email and return to home page</button>
+
+</form>
 
 <!-- SEND EMAIL TO AN EMAIL ADDRESS INPUT BY THE USER.-->
 

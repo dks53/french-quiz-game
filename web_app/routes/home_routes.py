@@ -130,12 +130,22 @@ def new_quiz_end():
     else:
         comment = "IF THIS SHOWS UP, SOMETHING'S WRONG"
 
-    #email_report_to = str(request.form)
-    #print(email_report_to)
-
-    #flash(f"Quiz report emailed to '{email_report_to}' successfully!", "success")
-
     return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info, 
     score_count=score_count, percent_score=percent_score, comment=comment)
     #return render_template("quiz_setup.html")
 
+@home_routes.route("/new/email", methods=["POST"])
+def quiz_result_email():
+
+    email_report_to = dict(request.form)
+    print(email_report_to['email_address'])
+
+    flash(f"Quiz report emailed to '{email_report_to['email_address']}' successfully!", "success")
+
+    return redirect("/")
+
+@home_routes.route("/user_feedback")
+def user_feedback_form():
+    print("VISITED FEEDBACK PAGE")
+    # need to have feedback emailed to me?
+    return render_template("user_feedback.html")
