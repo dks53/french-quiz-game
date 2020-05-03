@@ -22,7 +22,7 @@ F,poule,hen,animals,1
 M,cheval,horse,animals,1
 F,chevre,goat,animals,1
 M,coq,rooster,animals,1
-M,ane,donkey,animals,1
+M,âne,donkey,animals,1
 M,lait,milk,cuisine,2
 M,fromage,cheese,cuisine,2
 M,poulet,chicken,cuisine,2
@@ -44,3 +44,4 @@ M,malade,patient,health,3
 M,asthme,asthma,health,3
 M,diabète,diabetes,health,3
 F,fièvre,fever,health,3
+F,diarrhée,diarrhea,health,3

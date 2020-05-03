@@ -3,29 +3,55 @@
 
 {% block content %}
 
-<h1>Here's how you did:</h1>
+<h1>Result</h1>
+<br>
+<h3>Here's how you did:</h3>
+<br>
+
 <ul>
     <li>Level: {{quiz_params['lvl']}}</li>
     <li>Category: {{quiz_params['categ']}}</li>
     <li>Length (# of questions): {{quiz_params['len']}}</li>
 </ul>
-<!-- <table style="{ border-style: 'solid' }"> -->
-    <thead><td>Your Answer</td> <td>Correct Answer</td> <td>Correct?</td></thead>
+<hr>
+<table style="width: 50%;">
+        <tr>
+            <td><b>#</b></td>
+            <td><b>Your Answer</b></td> 
+            <td><b>Correct Answer</b></td> 
+            <td><b>Correct?</b></td></thead>
+        </tr>
     {% if feedbacks %}
         {% for feedback in feedbacks %}
         <tr>
+            <td> {{feedback['number']}}. </td>
             <td> {{feedback['english_word']}} </td>
             <td> {{feedback['french_word']}} </td>
             <td>
                 {% if feedback["correct"] %}
-                    Correct
+                    <label style = "color:green;"> Correct </label>
                 {% else %}
-                    Incorrect
+                    <label style = "color:red;"> Incorrect </label>
                 {% endif %}
             </td>
+            <br>
+            <br>
         </tr>
         {% endfor %}
     {% endif %}
 </table>
+<br>
+<br>
+
+<label style = "color:deepskyblue ; font-size: x-large;"> 
+    You scored a total of: <b>{{score_count}}</b> out of {{quiz_params['len']}} ({{percent_score}}%)
+</label>
+<br>
+<label style = "color:deepskyblue;"> 
+    <i>Remarks: {{comment}}</i>
+</label>
+
+
+
 
 {% endblock %}

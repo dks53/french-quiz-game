@@ -3,6 +3,29 @@
 import csv
 import random
 import os
+from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+load_dotenv()
+
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+MY_EMAIL = os.environ.get("MY_EMAIL_ADDRESS")
+
+def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>"):
+    client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
+    print("CLIENT:", type(client))
+    print("SUBJECT:", subject)
+    #print("HTML:", html)
+    message = Mail(from_email=MY_EMAIL, to_emails=MY_EMAIL, subject=subject, html_content=html)
+    try:
+        response = client.send(message)
+        print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
+        print(response.status_code) #> 202 indicates SUCCESS
+        return response
+    except Exception as e:
+        print("OOPS", e.message)
+        return None
 
 def load_database():
     #csv_file_path = "words_database.csv" # a relative filepath
@@ -105,7 +128,7 @@ def get_quiz(quiz_length):
 #################
 if __name__ == "__main__":
 
-    #all_data = load_database()
+    all_data = load_database()
 
     chosen_level = input("Choose a level: ")
     valid_level = level_validation(chosen_level)
@@ -141,6 +164,22 @@ if __name__ == "__main__":
     print("****************************")
     print("You scored :", final_score)
     print("****************************")
+
+    example_subject = "French Quiz Score"
+
+    example_html = f"""
+    <h3>This is a test of the French Quiz Score Email Report</h3>
+    <h4>Today's Date</h4>
+    <p>Sun, May 3rd, 2020</p>
+    <h4>My Score</h4>
+    <ul>
+        <li>*********************</li>
+        <li>You scored: {final_score} </li>
+        <li>*********************</li>
+    </ul>
+    """
+
+    send_email(example_subject, example_html)
 
     #TODO: Congratulations, that's a new high score!
     #TODO: Congratulations, you answered all correctly!

@@ -4,11 +4,18 @@
 {% block content %}
 
 <h1>Quiz</h1>
+<br>
+<h3>Good luck!</h3>
+<br>
+
+
 <ul>
     <li>Level: {{quiz_params['lvl']}}</li>
     <li>Category: {{quiz_params['categ']}}</li>
     <li>Length (# of questions): {{quiz_params['len']}}</li>
 </ul>
+<hr>
+
 
 <form action="/new/feedback" method="POST">
     <input type="hidden" name="quiz_length" value="{{quiz_params['len']}}">
@@ -16,15 +23,19 @@
     <input type="hidden" name="quiz_level" value="{{quiz_params['lvl']}}">
     {% if questions %}
         {% for question in questions %}
-            <label> {{question['english_word']}} </label>
-            <input type="text" name="{{question['number']}}" placeholder=" oui">
+            <label> {{question['number']}}. </label>
+            <label> What is the french word for </label>
+            <label><b> {{question['english_word']}} </b>?</label>
+            <input type="text" name="{{question['number']}}">
             <input type="hidden" name="{{question['number']}}_answer" value="{{question['french_word']}}">
+            <br>
             <br>
         {% endfor %}
     {% endif %}
 
-    
     <br>
+    <label style="font-size:11px"><i>Make sure you check your work before submitting. 
+        Once you submit, you will not be able to change your responses. </i></label>
     <br>
     <button class="btn btn-primary" style="background-color:gold; border-color: white;"><b>Submit Quiz</b></button>
 

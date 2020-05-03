@@ -95,7 +95,9 @@ def new_quiz_end():
 
     for i in range(1, quiz_length + 1):
         question = str(i)
+        count = 0
         payload = {
+            "number": i,
             "correct": quiz_info[question].lower() == quiz_info[question + "_answer"].lower(),
             "english_word": quiz_info[question],
             "french_word": quiz_info[question + "_answer"]
@@ -103,6 +105,36 @@ def new_quiz_end():
 
         feedbacks.append(payload)
 
+        
+    score_count = 0
+    for feedback in feedbacks:
+        if feedback["correct"] == True:
+            score_count = score_count + 1
+        else:
+            score_count
+    
+    print(score_count)
+
+    percent_score = round((float(score_count)/float(setup_info['len']))*100,2)
+
+    print(percent_score)
+
+    comment = ""
+
+    if percent_score == 100:
+        comment = "That's a perfect score! Great job!"
+    elif percent_score < 100 and percent_score >= 85:
+        comment = "Great going! You're almost there!"
+    elif percent_score < 85 and percent_score >= 60:
+        comment = "Don't worry, you just need some more practice"
+    elif percent_score < 60:
+        comment = "What happened there? You need to work harder!"
+    else:
+        comment = "IF THIS SHOWS UP, SOMETHING'S WRONG"
+
+    
+
     # questions must contain english word and ID
-    return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info)
+    return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info, 
+    score_count=score_count, percent_score=percent_score, comment=comment)
     #return render_template("quiz_setup.html")
