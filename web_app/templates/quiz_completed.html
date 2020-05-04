@@ -1,0 +1,51 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+
+<h1>Result</h1>
+<br>
+<h3>Here's how you did:</h3>
+<br>
+<ul>
+    <li>Level: {{quiz_info['quiz_level']}}</li>
+    <li>Category: {{quiz_info['quiz_cat']}}</li>
+    <li>Length (# of questions): {{quiz_info['quiz_length']}}</li>
+</ul>
+<hr>
+
+<table style="width: 50%;">
+        <thead>
+            <td><b>#</b></td>
+            <td><b>Your Answer</b></td> 
+            <td><b>Correct Answer</b></td> 
+            <td><b>Correct?</b></td></thead>
+        </thead>
+    {% if feedbacks %}
+        {% for feedback in feedbacks %}
+        <tr>
+            <td> {{feedback['number']}}. </td>
+            <td> {{feedback['user_response']}} </td>
+            <td> {{feedback['french_word']}} </td>
+            <td>
+                {% if feedback["correct"] %}
+                    <label style = "color:green;"> ✅ Correct</label>
+                {% else %}
+                    <label style = "color:red;"> ❌ Incorrect</label>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+
+<label style = "color:deepskyblue ; font-size: x-large;"> 
+    You scored a total of: <b>{{quiz_info['score_count']}}</b> out of {{quiz_info['quiz_length']}} ({{quiz_info['percent_score']}}%)
+</label>
+<br>
+<label style = "color:deepskyblue;"> 
+    <i>Remarks: {{quiz_info['comment']}}</i>
+</label>
+<br>
+<br>
+{% endblock %}

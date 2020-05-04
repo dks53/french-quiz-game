@@ -1,8 +1,10 @@
 # web_app/routes/home_routes.py
 
 from flask import Blueprint, render_template, flash, request, redirect
-from app.play_quiz import get_category_data, get_level_data, load_database
+from app.play_quiz import get_category_data, get_level_data, load_database, send_email
 from random import shuffle
+import json
+from prettytable import PrettyTable
 
 home_routes = Blueprint("home_routes", __name__)
 
@@ -73,7 +75,7 @@ def new_quiz_start():
         else:
             break
         count = count + 1
-
+    print("END OF NEW QUIZ")
     # questions must contain english word and ID
     return render_template("quiz_uncompleted.html", questions=questions, quiz_params=setup_info)
     #return render_template("quiz_setup.html")
@@ -83,7 +85,7 @@ def new_quiz_end():
     print("VISITED NEW QUIZ START PAGE")
     #print("FORM DATA:", dict(request.form))
     quiz_info = dict(request.form)
-
+    print("QUIZ INFO: ", quiz_info)
     quiz_length = int(quiz_info['quiz_length'])
     feedbacks = []
 
@@ -96,16 +98,15 @@ def new_quiz_end():
     for i in range(1, quiz_length + 1):
         question = str(i)
         count = 0
-        payload = {
+        collected_responses = {
             "number": i,
             "correct": quiz_info[question].lower() == quiz_info[question + "_answer"].lower(),
-            "english_word": quiz_info[question],
+            "user_response": quiz_info[question],
             "french_word": quiz_info[question + "_answer"]
         }
 
-        feedbacks.append(payload)
+        feedbacks.append(collected_responses)
 
-        
     score_count = 0
     for feedback in feedbacks:
         if feedback["correct"] == True:
@@ -130,22 +131,74 @@ def new_quiz_end():
     else:
         comment = "IF THIS SHOWS UP, SOMETHING'S WRONG"
 
+    #print("Feedbacks: ", feedbacks)
+    #print("Quiz Params: ", setup_info)
+    #print("Score: ", score_count)
+    #print("Percent: ", percent_score)
+    #print("Comment: ", comment)
+
+    feedbacks_string = json.dumps(feedbacks)
+
     return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info, 
-    score_count=score_count, percent_score=percent_score, comment=comment)
+    score_count=score_count, percent_score=percent_score, comment=comment, feedbacks_string=feedbacks_string)
     #return render_template("quiz_setup.html")
 
-@home_routes.route("/new/email", methods=["POST"])
+@home_routes.route("/new/quiz_completed", methods=["POST"])
 def quiz_result_email():
 
-    email_report_to = dict(request.form)
-    print(email_report_to['email_address'])
+    #email_report_to = dict(request.form)
+    #print(email_report_to['email_address'])
 
-    flash(f"Quiz report emailed to '{email_report_to['email_address']}' successfully!", "success")
+    quiz_info = dict(request.form)
+    quiz_info['feedbacks'] = json.loads(quiz_info['feedbacks'])
+    email_report_to = quiz_info['email_address']
+    #print("QUIZ INFO: ", quiz_info)
+    #print("FEEDBACKS: ", quiz_info['feedbacks'])
+    quiz_length = int(quiz_info['quiz_length'])
+    #feedbacks = []
 
-    return redirect("/")
+    setup_info = {
+        'lvl': quiz_info['quiz_level'],
+        'categ': quiz_info['quiz_cat'],
+        'len': quiz_info['quiz_length']
+    }
 
-@home_routes.route("/user_feedback")
-def user_feedback_form():
-    print("VISITED FEEDBACK PAGE")
-    # need to have feedback emailed to me?
-    return render_template("user_feedback.html")
+    send_email(to=email_report_to, html=generate_email_feedback(quiz_info))
+
+    flash(f"Quiz report emailed to '{email_report_to}' successfully!", "success")
+
+    return render_template("quiz_completed.html", quiz_info=quiz_info, email_report_to=email_report_to, feedbacks=quiz_info['feedbacks'])
+
+def generate_email_feedback(quiz_info):
+    header = f"""    
+    <h4>French Quiz Score Report</h4>
+    <br>
+    Level: {quiz_info['quiz_level']} <br>
+    Categroy: {quiz_info['quiz_cat']} <br>
+    Quiz Length: {quiz_info['quiz_length']} <br>
+    <br>
+
+    """
+
+    content = PrettyTable()
+
+    content.field_names = ["#", "Your Response", "Correct Response", "Correct?"]
+
+    for feedback_line in quiz_info['feedbacks']:
+        content.add_row([feedback_line["number"], feedback_line["user_response"], feedback_line["french_word"], feedback_line["correct"]])
+    
+    content = content.get_string()
+    
+    footer = f"""
+
+    ************************** <br>
+    Final Score: {quiz_info['score_count']} out of {quiz_info['quiz_length']} <br>
+    ************************** <br>
+    
+    <br>
+    <br>
+
+    """
+
+    return header + "\n" + content + "\n" + footer
+    

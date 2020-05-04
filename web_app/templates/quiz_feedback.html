@@ -15,17 +15,17 @@
 </ul>
 <hr>
 <table style="width: 50%;">
-        <tr>
+        <thead>
             <td><b>#</b></td>
             <td><b>Your Answer</b></td> 
             <td><b>Correct Answer</b></td> 
-            <td><b>Correct?</b></td></thead>
-        </tr>
+            <td><b>Correct?</b></td>
+        </thead>
     {% if feedbacks %}
         {% for feedback in feedbacks %}
         <tr>
             <td> {{feedback['number']}}. </td>
-            <td> {{feedback['english_word']}} </td>
+            <td> {{feedback['user_response']}} </td>
             <td> {{feedback['french_word']}} </td>
             <td>
                 {% if feedback["correct"] %}
@@ -34,8 +34,6 @@
                     <label style = "color:red;"> ❌ Incorrect</label>
                 {% endif %}
             </td>
-            <br>
-            <br>
         </tr>
         {% endfor %}
     {% endif %}
@@ -52,13 +50,23 @@
 </label>
 <br>
 <br>
-<form action="/new/email" method="POST"> <!-- Doesn't work when method is POST-->
+
+<form action="/new/quiz_completed" method="POST"> <!-- Doesn't work when method is POST-->
 
     <label>Send quiz result to:</label>
     <input type="email" name="email_address" placeholder="id@example.com">
     <br>
 
-    <button>Send email and return to home page</button>
+    <input type="hidden" name="quiz_length" value="{{quiz_params['len']}}">
+    <input type="hidden" name="quiz_cat" value="{{quiz_params['categ']}}">
+    <input type="hidden" name="quiz_level" value="{{quiz_params['lvl']}}">
+    
+    <input type="hidden" name="feedbacks" value="{{feedbacks_string}}">
+    <input type="hidden" name="score_count" value="{{score_count}}">
+    <input type="hidden" name="percent_score" value="{{percent_score}}">
+    <input type="hidden" name="comment" value="{{comment}}">
+
+    <button>Send email</button>
 
 </form>
 
