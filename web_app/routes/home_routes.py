@@ -180,22 +180,41 @@ def generate_email_feedback(quiz_info):
     """
 
     content = f"""
+    <br>
+    <br>
+    <table style="width: 50%;">
+        <thead>
+            <td><b>#</b></td>
+            <td><b>Your Answer</b></td> 
+            <td><b>Correct Answer</b></td> 
+            <td><b>Correct?</b></td></thead>
+        </thead>
     """
-    #content = PrettyTable()
-#
-    #content.field_names = ["#", "Your Response", "Correct Response", "Correct?"]
-#
-    #for feedback_line in quiz_info['feedbacks']:
-    #    content.add_row([feedback_line["number"], feedback_line["user_response"], feedback_line["french_word"], feedback_line["correct"]])
-    #
-    #content = content.get_string(title="STUDENT RESPONSES")
+    for feedback in quiz_info['feedbacks']:
+        content += f"""
+        <tr>
+            <td> {feedback['number']}. </td>
+            <td> {feedback['user_response']} </td>
+            <td> {feedback['french_word']} </td>
+            <td>
+            """
+        if feedback["correct"]:
+            content += "<label style = 'color:green;'> ✅ Correct</label>"
+        else:
+            content += "<label style = 'color:red;'> ❌ Incorrect</label>"
+        content += "</td>"
+        content += "</tr>"
     
+    content += "</table>"
+
+    #print(content)
+
     footer = f"""
 
     <br>
     ************************** <br>
     <b> Final Score: {quiz_info['score_count']} out of {quiz_info['quiz_length']} </b> <br>
-    ************************** <br>
+    <b> Comment: {quiz_info['comment']} </b>
 
     """
 
