@@ -130,6 +130,7 @@ def send_email(subject="French Quiz Score Report", html="", to=MY_EMAIL):
 if __name__ == "__main__":
 
     all_data = load_database()
+    print(all_data)
 
     chosen_level = input("Choose a level: ")
     valid_level = level_validation(chosen_level)

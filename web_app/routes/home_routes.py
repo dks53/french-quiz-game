@@ -82,10 +82,10 @@ def new_quiz_start():
 
 @home_routes.route("/new/feedback", methods=["POST"])
 def new_quiz_end():
-    print("VISITED NEW QUIZ START PAGE")
+    print("VISITED NEW QUIZ SCORE PAGE")
     #print("FORM DATA:", dict(request.form))
     quiz_info = dict(request.form)
-    print("QUIZ INFO: ", quiz_info)
+    #print("QUIZ INFO: ", quiz_info)
     quiz_length = int(quiz_info['quiz_length'])
     feedbacks = []
 
@@ -145,6 +145,7 @@ def new_quiz_end():
 
 @home_routes.route("/new/quiz_completed", methods=["POST"])
 def quiz_result_email():
+    print("VISITED POST EMAIL QUIZ END PAGE")
 
     #email_report_to = dict(request.form)
     #print(email_report_to['email_address'])
@@ -165,40 +166,37 @@ def quiz_result_email():
 
     send_email(to=email_report_to, html=generate_email_feedback(quiz_info))
 
-    flash(f"Quiz report emailed to '{email_report_to}' successfully!", "success")
+    flash(f"Quiz score emailed to '{email_report_to}' successfully!", "success")
 
     return render_template("quiz_completed.html", quiz_info=quiz_info, email_report_to=email_report_to, feedbacks=quiz_info['feedbacks'])
 
 def generate_email_feedback(quiz_info):
     header = f"""    
-    <h4>French Quiz Score Report</h4>
+    <h3> Student Name: {quiz_info['name']} </h3>
     <br>
     Level: {quiz_info['quiz_level']} <br>
     Categroy: {quiz_info['quiz_cat']} <br>
     Quiz Length: {quiz_info['quiz_length']} <br>
-    <br>
-
     """
 
-    content = PrettyTable()
-
-    content.field_names = ["#", "Your Response", "Correct Response", "Correct?"]
-
-    for feedback_line in quiz_info['feedbacks']:
-        content.add_row([feedback_line["number"], feedback_line["user_response"], feedback_line["french_word"], feedback_line["correct"]])
-    
-    content = content.get_string()
+    content = f"""
+    """
+    #content = PrettyTable()
+#
+    #content.field_names = ["#", "Your Response", "Correct Response", "Correct?"]
+#
+    #for feedback_line in quiz_info['feedbacks']:
+    #    content.add_row([feedback_line["number"], feedback_line["user_response"], feedback_line["french_word"], feedback_line["correct"]])
+    #
+    #content = content.get_string(title="STUDENT RESPONSES")
     
     footer = f"""
 
-    ************************** <br>
-    Final Score: {quiz_info['score_count']} out of {quiz_info['quiz_length']} <br>
-    ************************** <br>
-    
     <br>
-    <br>
+    ************************** <br>
+    <b> Final Score: {quiz_info['score_count']} out of {quiz_info['quiz_length']} </b> <br>
+    ************************** <br>
 
     """
 
     return header + "\n" + content + "\n" + footer
-    

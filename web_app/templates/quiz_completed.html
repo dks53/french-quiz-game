@@ -38,7 +38,7 @@
         {% endfor %}
     {% endif %}
 </table>
-
+<br>
 <label style = "color:deepskyblue ; font-size: x-large;"> 
     You scored a total of: <b>{{quiz_info['score_count']}}</b> out of {{quiz_info['quiz_length']}} ({{quiz_info['percent_score']}}%)
 </label>
@@ -46,6 +46,5 @@
 <label style = "color:deepskyblue;"> 
     <i>Remarks: {{quiz_info['comment']}}</i>
 </label>
-<br>
-<br>
+
 {% endblock %}
