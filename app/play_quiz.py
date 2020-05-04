@@ -189,8 +189,3 @@ if __name__ == "__main__":
     """
 
     send_email(subject, content)
-
-    #TODO: Congratulations, that's a new high score!
-    #TODO: Congratulations, you answered all correctly!
-
-    #TODO: Email report

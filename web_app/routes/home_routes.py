@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, flash, request, redirect
 from app.play_quiz import get_category_data, get_level_data, load_database, send_email
 from random import shuffle
 import json
-from prettytable import PrettyTable
+#from prettytable import PrettyTable
 
 home_routes = Blueprint("home_routes", __name__)
 
