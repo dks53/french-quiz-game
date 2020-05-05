@@ -26,9 +26,9 @@ def load_database():
 
     return all_data
 
-def level_validation(user_level):
+def level_validation(user_level, all_data_info):
     count = 0
-    for data in all_data:
+    for data in all_data_info:
         if data["level"] == user_level:
             count = count + 1
         else:
@@ -39,11 +39,10 @@ def level_validation(user_level):
     else:
         return user_level
 
-def get_level_data(user_level):
+def get_level_data(user_level, all_data_info):
     level_data = []
-    all_data = load_database()
 
-    for data in all_data:
+    for data in all_data_info:
         if data["level"] == user_level:
             level_data.append(data)
         else:
@@ -51,9 +50,9 @@ def get_level_data(user_level):
     
     return level_data
 
-def category_validation(user_category):
+def category_validation(user_category, level_data_info):
     count = 0
-    for data in level_data:
+    for data in level_data_info:
         if data["category"] == user_category:
             count = count + 1
         else:
@@ -130,17 +129,17 @@ def send_email(subject="French Quiz Score Report", html="", to=MY_EMAIL):
 if __name__ == "__main__":
 
     all_data = load_database()
-    print(all_data)
+    #print(all_data)
 
     chosen_level = input("Choose a level: ")
-    valid_level = level_validation(chosen_level)
+    valid_level = level_validation(chosen_level, all_data)
     print("You chose Level ", valid_level, "\n")
 
-    level_data = get_level_data(chosen_level)
+    level_data = get_level_data(chosen_level, all_data)
     #print(level_data)
 
     chosen_category = input("Choose a category: ")
-    valid_category = category_validation(chosen_category)
+    valid_category = category_validation(chosen_category, level_data)
     print("You chose the ", valid_category, "category", "\n")
     
     category_data = get_category_data(chosen_category, level_data)
@@ -163,6 +162,7 @@ if __name__ == "__main__":
     #print(shuffled_list)
 
     final_score = get_quiz(quiz_length)
+    
     print("****************************")
     print("You scored :", final_score)
     print("****************************")
@@ -188,4 +188,4 @@ if __name__ == "__main__":
 
     """
 
-    send_email(subject, content)
+    #send_email(subject, content)
