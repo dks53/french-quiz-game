@@ -222,3 +222,29 @@ def generate_email_feedback(quiz_info):
 
     return header + "\n" + content + "\n" + footer
 
+@home_routes.route("/project_feedback")
+def collect_feedback():
+    print("VISITED GET USER FEEDBACK PAGE")
+    return render_template("collect_feedback.html")
+
+@home_routes.route("/submitted_feedback", methods=["POST"])
+def received_feedback():
+    print("VISITED FEEDBACK SUBMITTED CONFIRMATION PAGE")
+    feedback_info = dict(request.form)
+    print(feedback_info)
+
+    send_email(html=send_feedback(feedback_info), subject="French Quiz App Feedback")
+
+    flash(f"Feedback emailed successfully!", "success")
+
+    return render_template("submitted_feedback.html", feedback_info=feedback_info)
+
+def send_feedback(feedback_info):
+    email_content = f"""    
+    Name: {feedback_info['name']} <br>
+    <br>
+    Email ID: {feedback_info['email_address']} <br>
+    <br>
+    Comment: {feedback_info['comment']} <br>
+    """
+    return email_content

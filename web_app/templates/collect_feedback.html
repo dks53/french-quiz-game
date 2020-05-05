@@ -1,0 +1,51 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georgetown_Hoyas_logo.svg/1200px-Georgetown_Hoyas_logo.svg.png" alt="Logo" style="width:128px;height:128px;">
+
+<style>
+    button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 10px;
+    margin: 4px 0;
+    border: none;
+    cursor: pointer;
+    width: 14%;
+    opacity: 0.8;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+</style>
+
+<br>
+<h1>Feedback, Comments and Suggestions</h1>
+<br>
+<h4>Your feedback is valuable to us. Please submit your thoughts via the form below.</h4>
+<br>
+
+<form action="/submitted_feedback" method="POST">
+    
+    <label>Name:</label>
+    <input type="text" name="name" placeholder="Name" size="30" required>
+    <br>
+    <label>Email ID:</label>
+    <input type="email" name="email_address" placeholder="id@example.com" size="30" required>
+    <br>
+    <br>
+
+    <label>Comment:</label>
+    <input type="text" name="comment" placeholder="Comment" size="50%" required>
+    <br>
+
+    <!-- Source: https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+    <button class="btn btn-primary" style="background-color:orangered; border-color: white;">
+        Submit Feedback</button>
+
+</form>
+
+{% endblock %}

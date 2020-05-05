@@ -1,0 +1,21 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georgetown_Hoyas_logo.svg/1200px-Georgetown_Hoyas_logo.svg.png" alt="Logo" style="width:128px;height:128px;">
+
+    <br>
+    <h1>Thank you for your feedback</h1>
+    <br>
+    <h4>Your feedback has been submitted to the creator of this app</h4>
+    
+    <form action="/">
+
+        <!-- Source: https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+        <button class="btn btn-primary" style="background-color: deepskyblue; border-color: white;">
+            Return to Home Page</button>
+    
+    </form>
+
+{% endblock %}
