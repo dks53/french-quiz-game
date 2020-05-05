@@ -55,7 +55,9 @@ def new_quiz_start():
     #print("FORM DATA:", dict(request.form))
     setup_info = dict(request.form)
 
-    level_data = get_level_data(setup_info['lvl'])
+    all_data = load_database()
+
+    level_data = get_level_data(setup_info['lvl'], all_data)
     category_data = get_category_data(setup_info['categ'], level_data)
 
     shuffle(category_data)
@@ -219,3 +221,4 @@ def generate_email_feedback(quiz_info):
     """
 
     return header + "\n" + content + "\n" + footer
+

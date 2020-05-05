@@ -3,6 +3,23 @@
 
 {% block content %}
 
+<style>
+    button {
+    background-color:coral;
+    color: white;
+    padding: 7px 10px;
+    margin: 4px 0;
+    border: none;
+    cursor: pointer;
+    width: 15%;
+    opacity: 0.8;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+</style>
+
 <h1>Result</h1>
 <br>
 <h3>Here's how you did:</h3>
@@ -39,7 +56,6 @@
     {% endif %}
 </table>
 <br>
-<br>
 
 <label style = "color:deepskyblue ; font-size: x-large;"> 
     You scored a total of: <b>{{score_count}}</b> out of {{quiz_params['len']}} ({{percent_score}}%)
@@ -54,10 +70,10 @@
 <form action="/new/quiz_completed" method="POST"> <!-- Doesn't work when method is POST-->
 
     <label>Your name:</label>
-    <input type="text" name="name" placeholder="Your name">
+    <input type="text" name="name" placeholder="Your name" required>
     <br>
-    <label>Send quiz result to:</label>
-    <input type="email" name="email_address" placeholder="id@example.com">
+    <label>Send result to:</label>
+    <input type="email" name="email_address" placeholder="id@example.com" required>
     <br>
 
     <input type="hidden" name="quiz_length" value="{{quiz_params['len']}}">
