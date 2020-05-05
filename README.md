@@ -27,7 +27,7 @@ git clone https://github.com/YOUR_USERNAME/french-quiz-game.git # this is the HT
 After cloning the repo, navigate there from the command-line: 
 
 ```sh
-cd ~/Desktop/robo-advisor/app
+cd ~/Desktop/french_quiz_game
 ```
 
 ## Prerequisits
@@ -78,7 +78,7 @@ FLASK_APP=web_app flask run
 
 > NOTE: you can quit the server by pressing ctrl+c at any time. If you change a file, you'll likely need to restart the server for the changes to take effect.
 
-## Deploying
+## Server Setup
 
 First, [install the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install), and make sure you can login and list your applications. Then create a new application server, optionally specifying a name (e.g. "french-quiz-web-app"):
 
@@ -98,8 +98,51 @@ heroku git:remote -a french-quiz-web-app # necessary if you created the app from
 git remote -v
 ```
 
+## Server Configuration
+
+Before we copy the source code to the remote server, we need to configure the server's environment in a similar way we configured our local environment.
+
+Instead of using a ".env" file, we will directly configure the server's environment variables by either clicking "Reveal Config Vars" from the "Settings" tab in your application's Heroku dashboard, or from the command line (instructions below):
+
+a screenshot of setting env vars via the app's online dashboard
+
+```sh
+# or, alternatively...
+
+# get environment variables:
+heroku config # at this time, results might be empty-ish
+
+# set environment variables:
+heroku config:set SENDGRID_API_KEY="_________"
+heroku config:set MY_EMAIL_ADDRESS="someone@something.com"
+```
+
+At this point, you should be able to verify the production environment has been configured with the proper environment variable values:
+
+```sh
+heroku config
+```
+
 After this configuration process is complete, you should be able to "deploy" the application's source code to the Heroku server:
+
+## Deploying
 
 ```
 git push heroku master
 ```
+
+Visit the application in a browser and note its URL for future reference:
+
+```sh
+heroku open -a my-app-name
+```
+
+Check server logs of your application:
+
+```sh
+heroku logs -a my-app-name
+```
+
+## Congratulations!
+
+With that, you should have the necessary capabilities to run the application locally or remotely via Heroku. Login to your Heroku account and find the "Open app" button to run the app on its own unique HTTP address.
