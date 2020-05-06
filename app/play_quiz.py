@@ -1,5 +1,6 @@
 # app/play_quiz.py
 
+## IMPORTING PYTHON PACKAGES AND MODULES 
 import csv
 import random
 import os
@@ -12,6 +13,7 @@ load_dotenv()
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 MY_EMAIL = os.environ.get("MY_EMAIL_ADDRESS")
 
+## FUNCTION DEFINITIONS (w/DOCSTRING COMMENTS)
 def load_database():
     """
     Loads the vocabulary database stored in the "data" folder of the repository.
@@ -251,7 +253,7 @@ def send_email(subject="French Quiz Score Report", html="", to=MY_EMAIL):
         print("OOPS", e.message)
         return None
 
-#################
+## USER INPUTS AND SYSTEM OUTPUTS
 if __name__ == "__main__":
 
     all_data = load_database()
@@ -288,11 +290,13 @@ if __name__ == "__main__":
     #print(shuffled_list)
 
     final_score = get_quiz(quiz_length)
+    #print(final_score)
     
     print("****************************")
     print("You scored :", final_score)
     print("****************************")
 
+    # email formatting
     subject = "French Quiz Score"
 
     content = f"""
@@ -313,4 +317,4 @@ if __name__ == "__main__":
 
     """
 
-    send_email(subject, content)
+    send_email(subject, content) # uses the default email ID to send from and receive to.

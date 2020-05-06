@@ -8,6 +8,7 @@ import pytest
 from app.play_quiz import level_validation, get_level_data, category_validation, get_category_data
 from app.play_quiz import get_eng_word, get_fren_word
 
+# tests the level validation function
 def test_level_validation():
 
     all_data_sample = [
@@ -35,6 +36,7 @@ def test_level_validation():
 
     assert result == level_validation(user_level_sample, all_data_sample)
 
+# tests the function that loops through the database to collect level specific data
 def test_get_level_data():
     
     all_data_sample = [
@@ -59,6 +61,7 @@ def test_get_level_data():
 
     assert result == get_level_data(user_level_sample, all_data_sample)
 
+# tests the category validation function
 def test_category_validation():
     
     level_data_sample = [
@@ -86,6 +89,7 @@ def test_category_validation():
     
     assert result == category_validation(user_category_sample, level_data_sample)
 
+# tests the function that loops through the level specific data to collect category specific data
 def test_get_category_data():
     
     level_data_sample = [
@@ -110,6 +114,7 @@ def test_get_category_data():
 
     assert result == get_category_data(user_category_sample, level_data_sample)
 
+# tests the function that collects only english words and adds them to a list
 def test_get_eng_word():
 
     category_data_sample = [
@@ -127,6 +132,7 @@ def test_get_eng_word():
 
     assert get_eng_word(category_data_sample) == result
 
+# tests the function that collects only the corresponding french words and adds them to a list
 def test_get_fren_word():
 
     category_data_sample = [
@@ -143,4 +149,3 @@ def test_get_fren_word():
     result = ['pain','pomme','poisson']
 
     assert get_fren_word(category_data_sample) == result
-

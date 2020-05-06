@@ -1,11 +1,13 @@
-# Darshil's french-quiz-game
-OPIM 244 Final Project
+# "Pardon my French: The Quiz App"
+### OPIM 244 Final Project - Darshil Shah
 
-This document walks you (the user) through this french quiz game. It will help you setup your environment to run the code successfully. 
+This document walks you (the user) through the french quiz  It will help you setup your environment to run the code successfully. 
+
+Click [here](https://french-quiz-game-dks53.herokuapp.com/) to see the app.
 
 ## What does this code do?
 
-text goes here
+This code prompts the user to choose quiz parameters - level, category and quiz length - to generate a quiz of English-French translations. The system accesses a database of vocabulary to randomly generate a new quiz every time. The user enters their responses to the question, which are then cross-checked with the database to check if the reponses are correct or not. The system then generates a quiz report output with the student's results. The student may then choose to email the report to any email address that they enter.
 
 ## If you want to create this program on your own, here's what you can do:
 
@@ -16,7 +18,6 @@ Fork the repository from GitHub [source](https://github.com/dks53/french-quiz-ga
 Then use GitHub Desktop software or the command-line to download or "clone" the repository onto your computer. 
 
 Choose a familiar download location like the Desktop.
-
 
 ```sh
 git clone https://github.com/YOUR_USERNAME/french-quiz-game.git # this is the HTTP address, but you could altenatively use the SSH address

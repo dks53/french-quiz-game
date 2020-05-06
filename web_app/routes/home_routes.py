@@ -4,51 +4,50 @@ from flask import Blueprint, render_template, flash, request, redirect
 from app.play_quiz import get_category_data, get_level_data, load_database, send_email
 from random import shuffle
 import json
-#from prettytable import PrettyTable
 
 home_routes = Blueprint("home_routes", __name__)
 
+# Home Page
 @home_routes.route("/")
 def index():
     print("VISITED THE HOME PAGE")
-    #return "Welcome Home (TODO)"
     return render_template("home.html")
 
+# About me page
 @home_routes.route("/about")
 def about():
     print("VISITED THE ABOUT PAGE")
-    #return "About Me (TODO)"
     return render_template("about.html")
 
+# Instructions page
 @home_routes.route("/instructions")
 def rules():
     print("VISITED THE INSTRUCTIONS PAGE")
-    #return "How to play the game (TODO)"
     return render_template("instructions.html")
 
+# Create new user (user registration) page
 @home_routes.route("/user/new")
 def register():
     print("VISITED THE REGISTRATION PAGE")
-    #return "New user page (TODO)"
     return render_template("signup.html")
 
+# User created successfully landing page
 @home_routes.route("/user/create", methods=["POST"])
 def regisetered():
     print("VISITED USER CREATED PAGE")
     user = dict(request.form)
-    #print("FORM DATA:", dict(request.form))
     print("FORM DATA:", user)
     # todo: store in a database or google sheet!
     flash(f"User '{user['user_name']}' created successfully!", "success")
-    #return "New user created page (TODO)"
     return redirect("/")
 
+# Takes user to the quiz setup / parameters input page
 @home_routes.route("/new/setup")
 def new_quiz_setup():
     print("VISITED NEW QUIZ SETTINGS PAGE")
-    #return "New quiz settings page (TODO)"
     return render_template("quiz_setup.html")
 
+# Takes user to the quiz page, to take the quiz.
 @home_routes.route("/new/start", methods=["POST"])
 def new_quiz_start():
     print("VISITED NEW QUIZ START PAGE")
@@ -78,16 +77,14 @@ def new_quiz_start():
             break
         count = count + 1
     print("END OF NEW QUIZ")
-    # questions must contain english word and ID
-    return render_template("quiz_uncompleted.html", questions=questions, quiz_params=setup_info)
-    #return render_template("quiz_setup.html")
 
+    return render_template("quiz_uncompleted.html", questions=questions, quiz_params=setup_info)
+
+# Takes the user to the results page where they see how they did on the quiz
 @home_routes.route("/new/feedback", methods=["POST"])
 def new_quiz_end():
     print("VISITED NEW QUIZ SCORE PAGE")
-    #print("FORM DATA:", dict(request.form))
     quiz_info = dict(request.form)
-    #print("QUIZ INFO: ", quiz_info)
     quiz_length = int(quiz_info['quiz_length'])
     feedbacks = []
 
@@ -116,9 +113,7 @@ def new_quiz_end():
         else:
             score_count
     
-    #print(score_count)
     percent_score = round((float(score_count)/float(setup_info['len']))*100,2)
-    #print(percent_score)
 
     comment = ""
 
@@ -133,32 +128,22 @@ def new_quiz_end():
     else:
         comment = "IF THIS SHOWS UP, SOMETHING'S WRONG"
 
-    #print("Feedbacks: ", feedbacks)
-    #print("Quiz Params: ", setup_info)
-    #print("Score: ", score_count)
-    #print("Percent: ", percent_score)
-    #print("Comment: ", comment)
-
     feedbacks_string = json.dumps(feedbacks)
 
     return render_template("quiz_feedback.html", feedbacks=feedbacks, quiz_params=setup_info, 
     score_count=score_count, percent_score=percent_score, comment=comment, feedbacks_string=feedbacks_string)
-    #return render_template("quiz_setup.html")
 
+# Landing page post emailing the report. End of quiz.
 @home_routes.route("/new/quiz_completed", methods=["POST"])
 def quiz_result_email():
     print("VISITED POST EMAIL QUIZ END PAGE")
 
-    #email_report_to = dict(request.form)
-    #print(email_report_to['email_address'])
-
     quiz_info = dict(request.form)
     quiz_info['feedbacks'] = json.loads(quiz_info['feedbacks'])
+    
     email_report_to = quiz_info['email_address']
-    #print("QUIZ INFO: ", quiz_info)
-    #print("FEEDBACKS: ", quiz_info['feedbacks'])
+
     quiz_length = int(quiz_info['quiz_length'])
-    #feedbacks = []
 
     setup_info = {
         'lvl': quiz_info['quiz_level'],
@@ -172,6 +157,7 @@ def quiz_result_email():
 
     return render_template("quiz_completed.html", quiz_info=quiz_info, email_report_to=email_report_to, feedbacks=quiz_info['feedbacks'])
 
+# Formatting the report for the email
 def generate_email_feedback(quiz_info):
     header = f"""    
     <h3> Student Name: {quiz_info['name']} </h3>
@@ -209,8 +195,6 @@ def generate_email_feedback(quiz_info):
     
     content += "</table>"
 
-    #print(content)
-
     footer = f"""
 
     <br>
@@ -222,11 +206,13 @@ def generate_email_feedback(quiz_info):
 
     return header + "\n" + content + "\n" + footer
 
+# Takes user to the feedback page (to provide feedback on the app)
 @home_routes.route("/project_feedback")
 def collect_feedback():
     print("VISITED GET USER FEEDBACK PAGE")
     return render_template("collect_feedback.html")
 
+# Takes user to the landing page when feedback is submitted successfully.
 @home_routes.route("/submitted_feedback", methods=["POST"])
 def received_feedback():
     print("VISITED FEEDBACK SUBMITTED CONFIRMATION PAGE")
@@ -239,6 +225,7 @@ def received_feedback():
 
     return render_template("submitted_feedback.html", feedback_info=feedback_info)
 
+# Formatting the feedback for the email
 def send_feedback(feedback_info):
     email_content = f"""    
     Name: {feedback_info['name']} <br>
