@@ -12,6 +12,15 @@ M,papier,paper,stationary,1
 F,trousse,pencil case,stationary,1
 M,taille-crayon,sharpener,stationary,1
 M,trombone,paper-clip,stationary,1
+M,surligneur,highlighter,stationary,1
+F,colle,glue,stationary,1
+M,marqueur,marker,stationary,1
+M,ciseaux,scissors,stationary,1
+F,enveloppe,envelope,stationary,1
+M,timbre,stamp,stationary,1
+F,craie,chalk,stationary,1
+M,tableau,chalkboard,stationary,1
+M,dictionnaire,dictionary,stationary,1
 M,chien,dog,animals,1
 F,chat,cat,animals,1
 F,vache,cow,animals,1
@@ -23,6 +32,15 @@ M,cheval,horse,animals,1
 F,chevre,goat,animals,1
 M,coq,rooster,animals,1
 M,âne,donkey,animals,1
+M,serpent,snake,animals,1
+F,souris,mouse,animals,1
+M,oiseau,bird,animals,1
+M,singe,monkey,animals,1
+M,tigre,tiger,animals,1
+F,antilope,antelope,animals,1
+M,lion,lion,animals,1
+M,aigle,eagle,animals,1
+M,hamster,hamster,animals,1
 M,lait,milk,cuisine,2
 M,fromage,cheese,cuisine,2
 M,poulet,chicken,cuisine,2
@@ -35,6 +53,17 @@ M,poisson,fish,cuisine,2
 M,beurre,butter,cuisine,2
 M,citron,lemon,cuisine,2
 F,friase,strawberry,cuisine,2
+M,ananas,pineapple,cuisine,2
+F,framboise,raspberry,cuisine,2
+F,pêche,peach,cuisine,2
+M,raisin,grape,cuisine,2
+M,champignon,mushroom,cuisine,2
+F,aubergine,eggplant,cuisine,2
+M,concombre,cucumber,cuisine,2
+M,maïs,corn,cuisine,2
+M,jambon,ham,cuisine,2
+M,gâteau,cake,cuisine,2
+F,confiture,jam,cuisine,2
 M,sang,blood,health,3
 M,diagnostic,diagnosis,health,3
 M,généraliste,general practitioner,health,3
@@ -45,3 +74,15 @@ M,asthme,asthma,health,3
 M,diabète,diabetes,health,3
 F,fièvre,fever,health,3
 F,diarrhée,diarrhea,health,3
+F,blessure,injury,health,3
+M,médecin,doctor,health,3
+F,douleur,pain,health,3
+M,hôpital,hospital,health,3
+M,pharmacie,pharmacy,health,3
+F,allergie,allergy,health,3
+F,entorse,sprain,health,3
+F,migraine,migraine,health,3
+F,grippe,flu,health,3
+M,antibiotique,antibiotic,health,3
+M,sparadrap,band-aid,health,3
+M,comprimé,tablet,health,3

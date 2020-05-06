@@ -143,6 +143,21 @@ Check server logs of your application:
 heroku logs -a my-app-name
 ```
 
+### Testing
+
+If you wish to run tests, from within your project's virtual environment (e.g. "french-quiz-game-env"), install the pytest package:
+
+```sh
+conda activate french-quiz-game-env # for example, if necessary
+pip install pytest # (first time only)
+```
+
+After writing tests, you should be able to run them from the root directory of your project repository:
+
+```sh
+pytest
+```
+
 ## Congratulations!
 
 With that, you should have the necessary capabilities to run the application locally or remotely via Heroku. Login to your Heroku account and find the "Open app" button to run the app on its own unique HTTP address.
