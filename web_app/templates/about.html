@@ -1,0 +1,33 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "about" %}
+
+{% block content %}
+
+    <h1>About Me</h1>
+
+    <p>
+        Hi there! My name is Darshil Shah. I am a senior in the MSB at Georgetown University, studying OPIM and Finance.
+        I am currently taking a class called Mgmt. App Development in Python (OPIM 244). As a part of this class, I have
+        taken on a project to develop a new app. <br>
+        <br>
+        This app is inspired by one of my elementry school French teachers. I started learning the French language early
+        in my school life and I love the language and my love for the language can be attributed to her only! <br>
+        <br>
+        At the time of developing this app, I spoke to her about some of the challenges that she is facing during the COVID
+        crisis. To help her and her students, I decided to create an app that helps students practice their French while
+        they are at home. <br>
+        <br>
+        If you have any feedback or suggestions about this app, I'd love to hear from you! Please don't hesitate to
+        reach out to me via the link provided below.
+
+    </p>
+
+    <form action="/" method="GET">
+
+        <!-- Source: https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+        <button class="btn btn-primary" style="background-color: deepskyblue; border-color: white;">
+            Return to Home Page</button>
+    
+    </form>
+
+{% endblock %}

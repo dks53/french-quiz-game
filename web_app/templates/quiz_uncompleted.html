@@ -1,0 +1,45 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "new_user" %}
+
+{% block content %}
+
+<h1>Quiz</h1>
+<br>
+<h3>Good luck!</h3>
+<br>
+
+<ul>
+    <li>Level: {{quiz_params['lvl']}}</li>
+    <li>Category: {{quiz_params['categ']}}</li>
+    <li>Length (# of questions): {{quiz_params['len']}}</li>
+</ul>
+<hr>
+
+<form action="/new/feedback" method="POST">
+    <input type="hidden" name="quiz_length" value="{{quiz_params['len']}}">
+    <input type="hidden" name="quiz_cat" value="{{quiz_params['categ']}}">
+    <input type="hidden" name="quiz_level" value="{{quiz_params['lvl']}}">
+    {% if questions %}
+        {% for question in questions %}
+            <label> {{question['number']}}. </label>
+            <label> What is the french word for </label>
+            <label><b> {{question['english_word']}} </b>?</label>
+            <input  type="text" name="{{question['number']}}">
+            <input type="hidden" name="{{question['number']}}_answer" value="{{question['french_word']}}">
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+    
+    <br>
+    <label style="font-size:11px"><i><b>Make sure you check your work before submitting. 
+        Once you submit, you will not be able to change your responses. </b></i></label>
+    <br>
+    <input type="checkbox" id="mywork" name="mywork" value="Accept" required>
+    <label for="mywork" style="font-size: x-small;"> I certify that this quiz is my own work and that I
+        have not copied in part or whole or otherwise plagiarised the work of other
+        students and/or persons.</label><br>
+    <button class="btn btn-primary" style="background-color:gold; border-color: white;"><b>Submit Quiz</b></button>
+
+</form>
+{% endblock %}

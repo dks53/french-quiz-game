@@ -1,0 +1,29 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = "instructions" %}
+
+{% block content %}
+
+    <h1>Game instructions</h1>
+
+    <p>Here's what you need to know:</p>
+
+    <ol>
+        <li>To start a new quiz, first navigate back to the home page</li>
+        <li>Once you arrive at the home page, click on "New Quiz" to being setting up a quiz</li>
+        <li>Once you arrive at the game page, select your level, category and quiz length</li>
+        <li>Once you have done so, click on "Start Quiz" to begin the quiz</li>
+        <li>Enter your responses and click the "Submit" button at the end of the quiz</li>
+        <li>From the results page you may choose to send the quiz results to a person of your choice or return to the home page</li>
+    </ol>
+
+    <p>If you're still confused, go ahead, start a new quiz and learn as you move along! </p>
+    <p>You can also read about the app's features on the home page </p>
+
+    <form action="/" method="GET">
+
+        <!-- Source: https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+        <button class="btn btn-primary" style="background-color: deepskyblue; border-color: white;">Return to Home Page</button>
+    
+    </form>
+
+{% endblock %}
